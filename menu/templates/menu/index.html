@@ -1,0 +1,17 @@
+<h1>Ресторан</h1>
+<h2>"Готовим как Гордон Рамзи"</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {% regroup dishes by category as category_list %}
+        {% for category in category_list %}
+        <h3>{{ category.grouper }}</h3>
+            {% for dish in category.list %}
+                <img src="{{ dish.image.url }}" width="200">
+                <h4>{{ dish.dish_name }}</h4>
+                <p>Б/Ж/У: {{ dish.protein }}/{{ dish.fat }}/{{ dish.carbohydrates }} г, {{ dish.energy }} кКал</p>
+                <p>{{ dish.price }} руб.<input type="checkbox" name="selected_id" value="{{ dish.id }}"></p>
+            {% endfor %}
+        {% endfor %}
+    <button name="submit">Отправить</button>
+</form>

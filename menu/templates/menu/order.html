@@ -1,0 +1,11 @@
+<h1>Ваш заказ</h1>
+
+{% if dishes %}
+    {% for dish in dishes %}
+        <h3>{{ dish.dish_name }}</h3>
+        <p>Б/Ж/У: {{ dish.protein }}/{{ dish.fat }}/{{ dish.carbohydrates }} г, {{ dish.energy }} кКал</p>
+        <p>{{ dish.price }} руб.</p>
+    {% endfor %}
+{% else %}
+    <p>Вернитесь на страницу меню и выбирете блюдо.</p>
+{% endif %}
