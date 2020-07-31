@@ -1,11 +1,32 @@
-<h1>Ваш заказ</h1>
+{% extends "menu/base.html" %}
 
-{% if dishes %}
-    {% for dish in dishes %}
-        <h3>{{ dish.dish_name }}</h3>
-        <p>Б/Ж/У: {{ dish.protein }}/{{ dish.fat }}/{{ dish.carbohydrates }} г, {{ dish.energy }} кКал</p>
-        <p>{{ dish.price }} руб.</p>
-    {% endfor %}
-{% else %}
-    <p>Вернитесь на страницу меню и выбирете блюдо.</p>
-{% endif %}
+{% block page_header %}
+    <div class="text-center m-5">
+        <h1 class="display-4">Ваш заказ</h1>
+    </div>
+{% endblock page_header %}
+
+{% block content %}
+    {% if dishes %}
+        <ul class="list-group">
+        {% for dish in dishes %}
+            <li class="list-group-item">
+                <b>{{ dish.dish_name }}</b>
+                <em>
+                {% if dish.allergens.all %}
+                    (аллергенты:
+                    {% for allergen in dish.allergens.all %}
+                        {{ allergen.allergen_name }}
+                    {% endfor %}
+                    )
+                {% endif %}
+                </em>
+                ----- {{ dish.price }} руб.
+            </li>
+        {% endfor %}
+        </ul>
+        <p class="mt-5 ml-3"><b>Сумма заказа:</b> {{ order_price }} руб.</p> 
+    {% else %}
+        <h3 class="text-center">Вернитесь на страницу меню и выберите блюдо.</h3>
+    {% endif %}
+{% endblock content %}

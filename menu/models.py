@@ -29,21 +29,34 @@ class Dish(models.Model):
     """Информация о блюде."""
     dish_name = models.CharField('Название', max_length=150)
     energy = models.PositiveSmallIntegerField(
-        'Калорийность', default=0, help_text='Укажите калорийность на порцию в кКал'
+        'Калорийность', default=0,
+        help_text='Укажите калорийность на порцию в кКал'
     )
     protein = models.PositiveSmallIntegerField(
-        'Белки', default=0, help_text='Укажите количество белка на порцию в граммах'
+        'Белки', default=0,
+        help_text='Укажите количество белка на порцию в граммах'
     )
     fat = models.PositiveSmallIntegerField(
-        'Жиры', default=0, help_text='Укажите количество жиров на порцию в граммах'
+        'Жиры', default=0,
+        help_text='Укажите количество жиров на порцию в граммах'
     )
     carbohydrates = models.PositiveSmallIntegerField(
-        'Углеводы', default=0, help_text='Укажите количество углеводов на порцию в граммах'
+        'Углеводы', default=0,
+        help_text='Укажите количество углеводов на порцию в граммах'
     )
-    price = models.PositiveSmallIntegerField('Цена', default=0, help_text='Укажите цену в рублях')
-    image = models.ImageField('Изображение', upload_to='images/dish_images/')
-    allergens = models.ManyToManyField(Allergen, verbose_name='Аллергенты', blank=True)
-    category = models.ForeignKey(Category, verbose_name='Категория', on_delete=models.SET_NULL, null=True)
+    price = models.PositiveSmallIntegerField(
+        'Цена', default=0, help_text='Укажите цену в рублях'
+    )
+    image = models.ImageField(
+        'Изображение', upload_to='images/dish_images/'
+    )
+    allergens = models.ManyToManyField(
+        Allergen, verbose_name='Аллергенты', blank=True
+    )
+    category = models.ForeignKey(
+        Category, verbose_name='Категория',
+        on_delete=models.SET_NULL, null=True
+    )
 
     def __str__(self):
         return self.dish_name

@@ -14,15 +14,24 @@ def menu(request):
 
 def order(request):
     """Выводит информацию о заказе."""
-    dishes_id = _get_dish_id(request.session.get('dishes'))
+    dishes_id = _get_list_dishes_id(request.session.get('dishes'))
     if dishes_id is None:
         dishes = dishes_id
     else:
         dishes = Dish.objects.filter(id__in=dishes_id)
-    return render(request, 'menu/order.html', {'dishes': dishes})
+        order_price = _get_order_price(dishes)
+    return render(request, 'menu/order.html',
+                  {'dishes': dishes, 'order_price': order_price})
 
 
-def _get_dish_id(list_id):
+def _get_list_dishes_id(list_id):
     if list_id:
         return list(map(int, list_id))
     return None
+
+
+def _get_order_price(items):
+    order_price = 0
+    for item in items:
+        order_price += item.price
+    return order_price

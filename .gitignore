@@ -120,6 +120,7 @@ venv.bak/
 
 # mkdocs documentation
 /site
+/media/images/dish_images
 
 # mypy
 .mypy_cache/
