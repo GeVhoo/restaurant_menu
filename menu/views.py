@@ -19,7 +19,7 @@ def order(request):
         dishes = dishes_id
     else:
         dishes = Dish.objects.filter(id__in=dishes_id)
-        order_price = _get_order_price(dishes)
+    order_price = _get_order_price(dishes)
     return render(request, 'menu/order.html',
                   {'dishes': dishes, 'order_price': order_price})
 
@@ -32,6 +32,7 @@ def _get_list_dishes_id(list_id):
 
 def _get_order_price(items):
     order_price = 0
-    for item in items:
-        order_price += item.price
+    if items:
+        for item in items:
+            order_price += item.price
     return order_price
