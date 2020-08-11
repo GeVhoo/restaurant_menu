@@ -1,0 +1,90 @@
+{% extends "menu/base.html" %}
+
+{% block page_header %}
+    <div class="border-bottom">
+        <div class="text-center m-5">
+            <h1 class="display-4">Документация API</h1>
+        </div>
+    </div>
+{% endblock page_header %}
+
+{% block content %}
+<div class="text-left m-5">
+    <p>API ресторана имеет две точки входа и позволяет получить список всех блюд из меню, а так же добавить новое блюдо в меню.</p>
+    <p><em><b>Для получения доступа к API необходимо указать в заголовке запроса токен (записанный в настройках) в формате:<br />'api-token: токен_из_настроек'</b></em></p>
+    <div class="border-top">
+        <h4 class="text-center mt-3">Получить меню всех блюд ресторана.</h4>
+        <p><b>GET </b>/api/menu</p>
+        <p>Пример cURL запроса на локальном сервере:</p>
+        <pre style="outline">
+        curl --location --request GET 'http://127.0.0.1:8000/api/menu/' \
+        --header 'api-token: токен_из_настроек'
+        </pre>
+        <p>Пример ответа (в меню всего два блюда):</p>
+        <pre>
+        [
+            {
+                "category": "Напитки",
+                "allergens": [
+                    "Молоко"
+                ],
+                "dish_name": "Капучино",
+                "energy": 40,
+                "protein": 2,
+                "fat": 5,
+                "carbohydrates": 10,
+                "price": 150
+            },
+            {
+                "category": "Горячие блюда",
+                "allergens": [
+                    "Яичный белок"
+                ],
+                "dish_name": "Американский завтрак",
+                "energy": 600,
+                "protein": 30,
+                "fat": 50,
+                "carbohydrates": 120,
+                "price": 300
+            }
+        ]
+        </pre>
+    </div>
+    <div class="border-top">
+        <h4 class="text-center mt-3">Добавление нового блюда в меню реторана.</h4>
+        <p><b>POST </b> /api/dish/add</p>
+        <p>У блюда есть два обязательных параметра, которые неоходимо указать: название и изображение.</p>
+        <p>Пример cURL запроса на локальном сервере:</p>
+        <pre>
+        curl --location --request POST 'http://127.0.0.1:8000/api/dish/add/' \
+        --header 'api-token: токен_из_настроек' \
+        --form 'dish_name=Новое блюдо' \
+        --form 'image=@/home/media/images/dish_images/new_dish.jpg' \
+        --form 'price=500' \
+        --form 'energy=100' \
+        --form 'protein=10' \
+        --form 'fat=10' \
+        --form 'carbohydrates=10' \
+        --form 'category=1' \
+        --form 'allergens=2'
+        </pre>
+        <p>Пример ответа:</p>
+        <pre>
+        {
+            "id": 15,
+            "dish_name": "Новое блюдо",
+            "energy": 100,
+            "protein": 10,
+            "fat": 10,
+            "carbohydrates": 10,
+            "price": 500,
+            "image": "http://127.0.0.1:8000/media/images/dish_images/new_dish.jpg",
+            "category": 1,
+            "allergens": [
+                2
+            ]
+        }
+        </pre>
+    </div>
+</div>
+{% endblock content %}
