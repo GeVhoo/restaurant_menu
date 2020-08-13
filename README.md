@@ -2,7 +2,11 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/d68d66d3ce7990441031/maintainability)](https://codeclimate.com/github/GeVhoo/restaurant_menu/maintainability)
 
 Это веб-приложение для ресторана,
-которое предоставляет базовый функционал для работы с меню. 
+которое предоставляет базовый функционал для работы с меню.
+В проекте использовались
+Django, Django REST Framework, PostgreSQL.
+Так же в проекте есть готовые для запуска приложения через Docker
+файлы dockerfile и docker-compose.
 ### На главной странице:  
 выводится список всех блюд из меню, сгруппированных по категориям,
 с галочками и кнопкой отправить, которая переходит на страницу заказа.

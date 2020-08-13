@@ -10,7 +10,7 @@ API_TOKEN = '9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -77,11 +77,11 @@ WSGI_APPLICATION = 'restaurant_menu.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'restaurant_menu',
-        'USER': 'gevhoo',
-        'PASSWORD': '123456',
-        'HOST': 'localhost',
-        'PORT': '',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'db',
+        'PORT': '5432',
     }
 }
 
